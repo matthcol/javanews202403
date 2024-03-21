@@ -19,11 +19,13 @@ class DemoStreamMovie2 {
     static void initData() throws IOException, URISyntaxException {
         String resource = "/movies.tsv";
         Path resourcePath = Path.of(Objects.requireNonNull(DemoStreamMovie2.class.getResource(resource)).toURI());
+        // NB: Java 7: try-with-resources
         try (var lineStream = Files.lines(resourcePath)){
             movieList = lineStream
                     .skip(1)  // skip headers
-                    .map(MovieCsv::movieFromTsvLine).toList();
-        }
+                    .map(MovieCsv::movieFromTsvLine)
+                    .toList();
+        } // close file under stream
     }
 
     @Test
@@ -33,4 +35,12 @@ class DemoStreamMovie2 {
                 .limit(10)
                 .forEach(System.out::println);
     }
+
+    // nombre de films de l'année 1984
+
+    // total durée des films commençant par Star Wars
+
+    // longueur maximal d'un titre
+
+    // durée min, max, totale, moyenne et nombre de films Star Wars ...
 }
