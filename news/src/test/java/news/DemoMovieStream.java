@@ -1,6 +1,7 @@
 package news;
 
 import news.data.Movie;
+import news.util.MovieCsv;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -22,6 +23,22 @@ public class DemoMovieStream {
                 .map(line -> line.split("\t"))
                 // display data
                 .map(Arrays::toString)
+                .forEach(System.out::println);
+    }
+
+    @Test
+    void readMovies2() throws IOException {
+        var file = new File(getClass().getResource("/movies.tsv").getFile());
+        // Nb: Files.lines => Stream<String>
+        var movies = Files.lines(file.toPath())
+                .skip(1)
+                //.limit(5)
+                .map(MovieCsv::movieFromTsvLine)
+                //.forEach(System.out::println);
+                .toList();
+        movies.stream()
+                .skip(500)
+                .limit(10)
                 .forEach(System.out::println);
     }
 
