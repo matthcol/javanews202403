@@ -1,9 +1,11 @@
 package news;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +49,7 @@ public class DemoStringStream {
 			.peek(city -> System.out.println("After UpperCase: " + city))
 			.filter(city -> city.startsWith("R")) // predicate function
 			.peek(city -> System.out.println("After Filter: " + city))
-			.toList(); // shortcut since Java 16 (LTS: Java 17) 
+			.toList(); // shortcut since Java 16 (LTS: Java 17)
 		System.out.println("Final result: " + result);
 	}
 	
@@ -98,7 +100,16 @@ public class DemoStringStream {
 		System.out.println("Total number of letters: " + total);		
 	}
 	
-	
+	@Test
+	void demoGenerator() {
+		// loop 1 .. 1000
+		// for (int i=0; i<1000; i++) {}
+		IntStream.range(0, 1000) // IntStream
+			.map(x -> x*x + 1)
+			.mapToDouble(Math::sqrt) // DoubleStream
+			.mapToObj(x -> MessageFormat.format("Number = {0}", x)) // Stream<String>
+			.forEach(System.out::println);
+	}
 }
 
 
