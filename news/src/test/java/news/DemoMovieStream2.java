@@ -182,4 +182,18 @@ class DemoMovieStream2 {
         System.out.println(f4.apply("Toulouse"));
         System.out.println(f5.call("Toulouse"));
     }
+
+    @Test
+    void demoCollectImperativeMode(){
+        var result = new ArrayList<String>(); // supply accumulator
+        for (var movie: movieList){
+            var title = movie.getTitle();
+            if (title.contains("Terminator")){
+                result.add(title); // accumulation
+            }
+        }
+        // finalization: (default: identity)
+        String allTitles = String.join(", ", result);
+        System.out.println(allTitles);
+    }
 }
