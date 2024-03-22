@@ -1,6 +1,8 @@
 package news;
 
 import news.data.Movie;
+import news.function.StringFunction;
+import news.function.StringUnaryOperator;
 import news.util.MovieCsv;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,9 +14,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.Objects;
-import java.util.OptionalInt;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 class DemoMovieStream2 {
     static List<Movie> movieList;
@@ -107,5 +111,75 @@ class DemoMovieStream2 {
                 .mapToInt(Integer::intValue)
                 .summaryStatistics();
         System.out.println(stats);
+    }
+
+    @Test
+    void demoReduceSum(){
+        // rewrite sum with reduce
+        int totalDuration = movieList.stream()
+                .map(Movie::getDuration)
+                .filter(Objects::nonNull)
+                .mapToInt(Integer::intValue)
+                //.reduce(0, (sum, value) -> sum + value)
+                .reduce(0, Integer::sum);
+        System.out.println(totalDuration);
+    }
+
+    // Exo: compute std, variance, quantile, ...
+
+    // collect
+    @Test
+    void demoCollectCollection1(){
+        var movieSelection = movieList.stream()
+                .filter(m -> m.getYear() == 1992)
+                //.toList() // immutable list
+                .collect(Collectors.toCollection(ArrayList::new));
+        System.out.println(movieSelection);
+        System.out.println(movieSelection.getClass());
+        movieSelection.add(new Movie());
+    }
+
+    @Test
+    void demoCollectCollection2(){
+        int capacity = (int) movieList.stream()
+                .filter(m -> m.getYear() == 1992)
+                .count();
+        var movieSelection = movieList.stream()
+                .filter(m -> m.getYear() == 1992)
+                //.toList() // immutable list
+                .collect(Collectors.toCollection(
+                        () -> new ArrayList<>(capacity)
+                ));
+        System.out.println(movieSelection);
+        System.out.println(movieSelection.getClass());
+        movieSelection.add(new Movie());
+    }
+
+    @Test
+    void demoStaticMethodInterface(){
+        var res = movieList.stream()
+                .map(Movie::getTitle)
+                //.filter(Predicate.isEqual("The Terminator"))
+                .filter(Predicate.<String>isEqual("The Terminator")
+                        .or(t -> t.length() > 100)
+                )
+                .findFirst();
+        System.out.println(res);
+    }
+
+    @Test
+    void demoFunctionType(){
+        Function<String,String> f = String::toUpperCase; // s -> s.toUpperCase()
+        Function<String,CharSequence> f2 = String::toUpperCase;
+        UnaryOperator<String> f3 = String::toUpperCase;
+        // custom types
+        StringFunction f4 = String::toUpperCase;
+        StringUnaryOperator f5 = String::toUpperCase;
+        // call functions
+        System.out.println(f.apply("Toulouse"));
+        System.out.println(f2.apply("Toulouse"));
+        System.out.println(f3.apply("Toulouse"));
+        System.out.println(f4.apply("Toulouse"));
+        System.out.println(f5.call("Toulouse"));
     }
 }
