@@ -94,4 +94,18 @@ class DemoMovieStream2 {
     }
 
     // durée min, max, totale, moyenne et nombre de films Star Wars ...
+    @ParameterizedTest
+    @ValueSource(strings={"Star Wars", "Number", "_______"})
+    void movieDurationStats(String beginTitle) {
+        var stats = movieList.stream()
+                .filter(m -> m.getTitle().startsWith(beginTitle))
+                // .peek(System.out::println)
+                .peek(m -> System.out.println("Filter: " + m + ", duration: " + m.getDuration()))
+                .map(Movie::getDuration)
+                .filter(Objects::nonNull)
+                .peek(System.out::println)
+                .mapToInt(Integer::intValue)
+                .summaryStatistics();
+        System.out.println(stats);
+    }
 }
