@@ -1,9 +1,11 @@
 package news;
 
+import news.util.CityUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.Stream;
 
 public class DemoOptional {
@@ -56,8 +58,39 @@ public class DemoOptional {
                     System.out.println("Value computed: " + res);
                 });
         System.out.println();
-        // - special value: 0, NaN
 
+        // - special value: 0, NaN
+            // Ex: longueur du nom de la ville, 0 sinon
+        System.out.println("Compute with optional, returning special value if not present");
+        Stream.of(optRes, optRes2)
+                .forEach(optCity -> {
+                    int res1 = optCity
+                            .map(String::length)
+                            .orElse(0);
+                    int res2 = optCity.stream()
+                            .mapToInt(String::length)
+                            .findFirst()
+                            .orElse(0);
+                    System.out.println("Value computed: " + res1
+                            + ", " + res2
+                    );
+                });
+        System.out.println();
         // - throw Exception
+
+        System.out.println("Compute with optional, throwing exception if not present");
+        for (var optCity: List.of(optRes, optRes2)){
+            try {
+                // compute or throw exception
+                var cityCode = optCity.map(city -> city.toUpperCase().substring(0, 3))
+                        .orElseThrow(() -> new IllegalArgumentException("No city found"));
+                // handle result
+                System.out.println("Computed code: " + cityCode);
+            } catch (IllegalArgumentException e){
+                System.out.println("Computation impossible for: " + optCity);
+            }
+        }
+        System.out.println();
     }
+
 }
