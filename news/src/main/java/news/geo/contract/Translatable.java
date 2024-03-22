@@ -1,4 +1,4 @@
-package news.geo;
+package news.geo.contract;
 
 @FunctionalInterface
 public interface Translatable {

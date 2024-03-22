@@ -1,4 +1,4 @@
-package news.geo;
+package news.geo.contract;
 
-public interface Mesurable2D extends PerimeterComputable, AreaComputable{
+public interface Mesurable2D extends PerimeterComputable, AreaComputable {
 }

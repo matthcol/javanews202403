@@ -1,2 +1,4 @@
-package news;public class DemoJavaTime {
+package news;
+
+public class DemoJavaTime {
 }

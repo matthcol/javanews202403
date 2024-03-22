@@ -1,2 +1,4 @@
-package news;public class DemoTemplateStringPreview {
+package news;
+
+public class DemoTemplateStringPreview {
 }

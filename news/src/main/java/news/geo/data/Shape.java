@@ -1,12 +1,12 @@
-package news.geo;
+package news.geo.data;
 
 import lombok.*;
+import news.geo.contract.Translatable;
 
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
-@ToString
+@ToString(includeFieldNames = false)
 public abstract class Shape implements Translatable {
     private String name;
     @Override

@@ -1,10 +1,11 @@
-package news.data;
+package news;
 
+import news.data.MovieR;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MovieRTest {
+class DemoMovieRecord {
 
     @Test
     void demoMovieR(){

@@ -1,2 +1,4 @@
-package news;public class DemoPatternMatching {
+package news;
+
+public class DemoPatternMatching {
 }

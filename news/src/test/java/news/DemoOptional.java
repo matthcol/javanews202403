@@ -1,2 +1,4 @@
-package news;public class DemoOptional {
+package news;
+
+public class DemoOptional {
 }
