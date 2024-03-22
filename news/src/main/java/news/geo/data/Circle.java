@@ -15,12 +15,12 @@ public class Circle extends Shape implements Mesurable2D {
 
     @Override
     public double area() {
-        return 0;
+        return Math.PI * radius * radius;
     }
 
     @Override
     public double perimeter() {
-        return 0;
+        return Math.PI * radius * 2;
     }
 
     @Override

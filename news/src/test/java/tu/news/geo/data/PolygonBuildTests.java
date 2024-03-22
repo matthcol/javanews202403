@@ -3,12 +3,10 @@ package tu.news.geo.data;
 import news.geo.data.Point2D;
 import news.geo.data.Polygon;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Named.named;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class PolygonTest {
+class PolygonBuildTests {
     @Test
     void testOf_3Vertices() {
         var p1 = Point2D.of("A");

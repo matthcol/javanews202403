@@ -6,6 +6,7 @@ import news.geo.contract.Mesurable2D;
 import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @ToString(callSuper = true, includeFieldNames = false)
@@ -21,12 +22,28 @@ public class Polygon extends Shape implements Mesurable2D, Iterable<Point2D> {
     }
     @Override
     public double area() {
-        return 0;
+        // shoelace formula
+        double res = 0.0;
+        int n = vertices.size();
+        return Math.abs(0.5 * IntStream.range(0, n)
+                .mapToDouble(i -> {
+                    var current = vertices.get(i);
+                    var next = vertices.get((i+1)%n);
+                    return current.getX() * next.getY() - next.getX() * current.getY();
+                })
+                .sum()
+        );
     }
 
     @Override
     public double perimeter() {
-        return 0;
+        double res = 0.0;
+        var previous = vertices.get(vertices.size()-1);
+        for (var vertix: vertices){
+            res += previous.distance(vertix);
+            previous = vertix;
+        }
+        return res;
     }
 
     @Override

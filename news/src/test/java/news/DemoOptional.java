@@ -3,6 +3,7 @@ package news;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class DemoOptional {
@@ -19,7 +20,7 @@ public class DemoOptional {
         var optRes = Stream.<String>of()
                 .findFirst();
         // System.out.println(optRes);
-        var optRes2 = Stream.<String>of("Pau", "Toulouse")
+        var optRes2 = Stream.<String>of("Toulouse", "Pau")
                 .findFirst();
         // System.out.println(optRes2);
         for (var optCity: List.of(optRes, optRes2)){
@@ -44,10 +45,19 @@ public class DemoOptional {
                         city -> System.out.println("Extract from optional: " + city),
                         () -> System.out.println("No data")
                 ));
-
-        // how to compute if input Optiona.Empty, you can return:
+        System.out.println();
+        // how to compute if input Optional.Empty, you can return:
         // - Optional.Empty
+        System.out.println("Compute with optional, returning empty optional if not present");
+        Stream.of(optRes, optRes2)
+                .forEach(optCity -> {
+                    Optional<String> res = optCity.map(
+                            city -> city.toUpperCase().substring(0,3));
+                    System.out.println("Value computed: " + res);
+                });
+        System.out.println();
         // - special value: 0, NaN
+
         // - throw Exception
     }
 }
