@@ -1,6 +1,6 @@
 package news;
 
-import news.data.MovieR;
+import news.cinema.data.MovieR;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,6 +1,6 @@
 package news;
 
-import news.data.Movie;
+import news.cinema.data.Movie;
 import news.function.StringFunction;
 import news.function.StringUnaryOperator;
 import news.util.MovieCsv;

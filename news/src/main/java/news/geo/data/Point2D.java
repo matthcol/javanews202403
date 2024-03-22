@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Point2D extends Shape {
     private double x;
     private double y;
-    double distance(@NonNull Point2D other){
+    public double distance(@NonNull Point2D other){
         return Math.hypot(x - other.x, y - other.y);
     }
     @Override

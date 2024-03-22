@@ -1,4 +1,4 @@
-package news.data;
+package news.cinema.data;
 
 // implicit: all args constructor, getter, toString, equals, hashCode
 public record MovieR(

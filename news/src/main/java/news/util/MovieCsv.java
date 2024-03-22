@@ -1,6 +1,6 @@
 package news.util;
 
-import news.data.Movie;
+import news.cinema.data.Movie;
 
 public class MovieCsv {
     public static Movie movieFromTsvLine(String tsvLine){

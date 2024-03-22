@@ -14,10 +14,11 @@ mvn test -Dtest=FirstTest#oneTest
 ## News Java 8
 - streams
 - functional interface
+- interface with static and default methods (factory, builder, ...)
 - function reference
 - lambda function
 - optionals
-- modern temporal types (java.time)
+- modern temporal types (java.time): ISO 8061
 
 ## News Java 11
 https://docs.oracle.com/en/java/javase/11/language/java-language-changes.html

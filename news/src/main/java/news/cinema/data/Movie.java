@@ -1,4 +1,4 @@
-package news.data;
+package news.cinema.data;
 
 import lombok.*;
 

@@ -1,6 +1,6 @@
 package news;
 
-import news.data.Movie;
+import news.cinema.data.Movie;
 import news.util.MovieCsv;
 import org.junit.jupiter.api.Test;
 
